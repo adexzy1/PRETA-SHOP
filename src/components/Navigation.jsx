@@ -20,6 +20,7 @@ const NavContainer = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 2rem 4rem;
+  margin-bottom: 0.5rem;
 `;
 const Nav = styled.nav`
   flex: 1;
