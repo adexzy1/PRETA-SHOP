@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Dataslider from '../Sliderdata';
+import axios from 'axios';
 
 const Slidercontainer = styled.div`
   width: 100%;
@@ -89,6 +90,13 @@ const Btn = styled.button`
 `;
 const Slider = () => {
   const [sliderIndex, setSliderIndex] = useState(0);
+  const [sliders, setSliders] = useState([]);
+  useEffect(() => {
+    axios.get('http://localhost:4000/getslidercontent').then((Response) => {
+      setSliders(Response.data);
+    });
+  }, []);
+
   const handleClick = (direction) => {
     if (direction === 'left') {
       if (sliderIndex !== Dataslider.length - 1) {
@@ -104,16 +112,17 @@ const Slider = () => {
       }
     }
   };
+
   return (
     <Slidercontainer>
       <Slidercontrol direction="left" onClick={() => handleClick('left')}>
         <ArrowLeftIcon />
       </Slidercontrol>
       <Wrapper sliderIndex={sliderIndex}>
-        {Dataslider.map((data, index) => {
+        {sliders.map((data) => {
           return (
-            <Slide key={index}>
-              <Image src={data.img} />
+            <Slide key={data._id}>
+              <Image src={data.image} />
               <Infocontainer>
                 <Title>{data.title}</Title>
                 <Desc>{data.desc}</Desc>

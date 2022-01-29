@@ -4,7 +4,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SearchIcon from '@mui/icons-material/Search';
 import { createTheme } from '@mui/material';
 import { ThemeProvider } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Axios from 'axios';
 
 const theme = createTheme({
@@ -93,9 +93,12 @@ const Navigation = () => {
     setSearchBox(!searchBox);
     console.log(searchBox);
   };
-  Axios.get('http://localhost:4000/menuitems').then((Response) => {
-    setMenuItems(Response.data);
-  });
+  useEffect(() => {
+    Axios.get('http://localhost:4000/menuitems').then((Response) => {
+      setMenuItems(Response.data);
+    });
+  }, []);
+
   return (
     <NavContainer>
       <Logo>PRETA.</Logo>
