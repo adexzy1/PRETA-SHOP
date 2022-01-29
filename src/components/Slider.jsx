@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { useEffect, useState } from 'react';
-import Dataslider from '../Sliderdata';
+
 import axios from 'axios';
 
 const Slidercontainer = styled.div`
@@ -99,16 +99,16 @@ const Slider = () => {
 
   const handleClick = (direction) => {
     if (direction === 'left') {
-      if (sliderIndex !== Dataslider.length - 1) {
+      if (sliderIndex !== sliders.length - 1) {
         setSliderIndex(sliderIndex + 1);
-      } else if (sliderIndex === Dataslider.length - 1) {
+      } else if (sliderIndex === sliders.length - 1) {
         setSliderIndex(0);
       }
     } else if (direction === 'right') {
       if (sliderIndex !== 0) {
         setSliderIndex(sliderIndex - 1);
       } else if (sliderIndex === 0) {
-        setSliderIndex(Dataslider.length - 1);
+        setSliderIndex(sliders.length - 1);
       }
     }
   };
